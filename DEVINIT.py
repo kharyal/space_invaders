@@ -32,7 +32,7 @@ tesla_counter=[0]
 level_change=False
 crashed=False
 level=1
-
+lastwasC=0
 while not ship.crashed:
     timer=(pygame.time.get_ticks())%5000
     for event in pygame.event.get():
@@ -43,24 +43,58 @@ while not ship.crashed:
 #   handles all the keyDown events
     if event.type==pygame.KEYDOWN:
         if event.key==pygame.K_q:
+            lastwasC=0
             ship.crashed=True
         if event.key==pygame.K_a:
+            lastwasC=0            
             movinglt=True
         if event.key==pygame.K_d:
+            lastwasC=0
             movingrt=True
         if event.key==pygame.K_SPACE:
+            lastwasC=0
             if not simple_bullet.present:
                 simple_bullet.present=True
                 simple_bullet.setCoordinate(ship.coordinates[0]+27,ship.coordinates[1])
         if event.key==pygame.K_w:
+            lastwasC=0
             if not tesla_bullet.present:
                 tesla_bullet.present=True
                 tesla_bullet.setCoordinate(ship.coordinates[0]+27,ship.coordinates[1])
         if event.key==pygame.K_LCTRL and count%50==0:
+            lastwasC=0
             level_change=True
         if event.key==pygame.K_h and count%7==0:
+            lastwasC=0
             ship.health+=1
             print(ship.health)
+        if event.key==pygame.K_c and lastwasC ==0:
+            cheat=""
+            flag=1
+            while flag==1:
+                for evt in pygame.event.get():
+                    if evt.type==pygame.KEYDOWN:
+                        if evt.unicode.isalpha():
+                            cheat+=evt.unicode
+                        if evt.key==pygame.K_KP_ENTER or evt.key==pygame.K_RETURN:
+                            flag=0
+                            break
+                        if evt.key==pygame.K_BACKSPACE:
+                            cheat=cheat[:-1]
+                    print(cheat)
+            if cheat=='stop':
+                alienSpeed=0
+            if cheat=='start':
+                alienSpeed=3
+            if cheat=='slowdown':
+                if alienSpeed>0:
+                    alienSpeed-=0.5
+            for i in alienlist:
+                for j in i:
+                    j.changeSpeed(alienSpeed)
+            lastwasC =1
+                
+
     elif event.type==pygame.KEYUP:
         if event.key==pygame.K_a:
             movinglt=False

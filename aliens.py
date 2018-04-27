@@ -14,16 +14,21 @@ class aliens():
     # moves aliens in X direction
     def changeCoordinateX(self,direction):
         if direction == 1:
-            self.coordinatesX+=3
+            self.coordinatesX+=self.speed
         else:
-            self.coordinatesX-=3
+            self.coordinatesX-=self.speed
     
+    #changes alienSpeed
+    def changeSpeed(self,alienSpeed):
+        self.speed=alienSpeed
+        
     # moves aliens in Y direction
     def changeCoordinateY(self):
         self.coordinatesY+=25
 
 class aliens1(aliens):
     def __init__(self):
+        self.speed=alienSpeed
         self.symbol1="_( \ )_"      # these are  the different symbols for aliens
         self.symbol2="_( | )_"
         self.symbol3="_( / )_"
@@ -37,6 +42,7 @@ class aliens1(aliens):
 
 class aliens2(aliens):
     def __init__(self):
+        self.speed=alienSpeed
         self.symbol1="_(* *)_"
         self.symbol2="_(- -)_"
         self.symbol3="_(* *)_"
