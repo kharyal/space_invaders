@@ -13,7 +13,7 @@ black=(0,0,0)
 white=(255,255,255)
 shipcolor=( 55,151,40)
 ship=spaceShip()
-line=myfont.render("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",False,shipcolor)
+line=myfont.render("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",False,shipcolor)
 shipImg = myfont.render(ship.symbol, False, shipcolor)
 
 #display_width=800
@@ -68,6 +68,10 @@ while not ship.crashed:
             movingrt=False
 
     gameDisplay.fill(black)
+    healthimg=myfont.render("health= "+str(ship.health), False, white)
+    scoreimg=myfont.render("score= "+str(ship.score), False, white)
+    gameDisplay.blit(healthimg,(10,display_height-55))
+    gameDisplay.blit(scoreimg,(display_width-display_width/12,display_height-55))   
 
     if movinglt and ship.coordinates[0]>0:
 #        print("movinglt")
@@ -111,5 +115,6 @@ while not ship.crashed:
     if level_change:
         level=changelevel(level,alienlist,level_change,ship)
         level_change=False
+    
     pygame.display.update()
     clock.tick(60)
