@@ -1,5 +1,5 @@
 import pygame
-
+from display import *
 pygame.init()
 pygame.font.init()
 
@@ -37,10 +37,10 @@ class aliens1(aliens):
 
 class aliens2(aliens):
     def __init__(self):
-        self.symbol1="__(* *)__"
-        self.symbol2="__(- -)__"
-        self.symbol3="__(* *)__"
-        self.symbol4="__(- -)__"
+        self.symbol1="_(* *)_"
+        self.symbol2="_(- -)_"
+        self.symbol3="_(* *)_"
+        self.symbol4="_(- -)_"
         self.if_tesla1="_(---)_"
         self.if_tesla2="_(|||)_"
         self.health=3
@@ -59,7 +59,7 @@ for i in range (0,7):
 
 tes_a_color=( 34, 175, 255 )
 
-mfont = pygame.font.SysFont('Comic Sans MS', 40)
+mfont = pygame.font.SysFont('Comic Sans MS', 30)
 a1t1 = mfont.render(alienlist[0][0].if_tesla1, False, tes_a_color)
 a1t2 = mfont.render(alienlist[0][0].if_tesla2, False, tes_a_color)
 
@@ -89,11 +89,14 @@ def draw_aliens(count,direction,direction_change,gameDisplay,ship,alien_present,
                          gameDisplay.blit(a1t1,(i.coordinatesX,i.coordinatesY))
                     else:
                         gameDisplay.blit(a1t2,(i.coordinatesX,i.coordinatesY))
-            if (i.coordinatesX>750 or i.coordinatesX<30) and i.health>0:
+            if i.health>0 and (i.coordinatesX>display_width - 75 or i.coordinatesX<30):
                 direction_change=True
-                direction=-1*direction
+                if(i.coordinatesX>display_width-75):
+                    direction=-1
+                if(i.coordinatesX<30):
+                    direction=1
                 
-            if i.coordinatesY>700 and i.health>0:
+            if i.coordinatesY>display_height-100 and i.health>0:
                 print("GAME OVER")
                 ship.crashed=True
 
@@ -102,9 +105,14 @@ def draw_aliens(count,direction,direction_change,gameDisplay,ship,alien_present,
     if direction_change==True:
         for j in alienlist:
             for i in j:
-                i.changeCoordinateY()
+                if i.health>0:
+                    i.changeCoordinateY()
+                    i.changeCoordinateX(direction)
+                    i.changeCoordinateX(direction)
+
         direction_change=False
     for j in alienlist:
         for i in j:
-            i.changeCoordinateX(direction)
+            if i.health>0:
+                i.changeCoordinateX(direction)
     return(direction,direction_change,level_change)    

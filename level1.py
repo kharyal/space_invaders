@@ -5,6 +5,7 @@ pygame.init()
 pygame.font.init()
 pygame.init()
 pygame.font.init()
+from display import *
 def changelevel(level,alienlist,level_change,ship):
     level+=1
     if level==2:

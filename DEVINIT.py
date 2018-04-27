@@ -13,7 +13,7 @@ black=(0,0,0)
 white=(255,255,255)
 shipcolor=( 55,151,40)
 ship=spaceShip()
-line=myfont.render("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",False,shipcolor)
+line=myfont.render("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------",False,shipcolor)
 shipImg = myfont.render(ship.symbol, False, shipcolor)
 
 #display_width=800
@@ -56,7 +56,11 @@ while not ship.crashed:
             if not tesla_bullet.present:
                 tesla_bullet.present=True
                 tesla_bullet.setCoordinate(ship.coordinates[0]+27,ship.coordinates[1])
-    
+        if event.key==pygame.K_LCTRL and count%50==0:
+            level_change=True
+        if event.key==pygame.K_h and count%7==0:
+            ship.health+=1
+            print(ship.health)
     elif event.type==pygame.KEYUP:
         if event.key==pygame.K_a:
             movinglt=False

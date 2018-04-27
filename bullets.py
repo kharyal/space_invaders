@@ -2,6 +2,7 @@
 import random
 import pygame
 from aliens import *
+from display import *
 pygame.init()
 pygame.font.init()
 
@@ -63,7 +64,7 @@ def draw_bullets(bullet,type,gameDisplay):
     elif type==2:
         gameDisplay.blit(tesla_img,(bullet.coordinatesX, bullet.coordinatesY))
     bullet.changeCoordinate()
-    if bullet.coordinatesY<0 or bullet.coordinatesY>800:
+    if bullet.coordinatesY<0 or bullet.coordinatesY>display_height:
         bullet.present=False
 
 def set_alien_bult_coordinates(alien_bult):
