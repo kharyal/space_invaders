@@ -30,9 +30,6 @@ class simple(bullets):                 # simple bullet
         self.symbol="^"                # symbol
         self.color=(16, 136, 144)
         self.present=False             # checks if bullet is present currently
-        self.new=False                 # __not used yet__
-        self.coordinatesX=0            # coordinates of bullet(initially of no use)
-        self.coordinatesY=800
 
     def changeCoordinate(self):        # changes Y coordinate 
         self.coordinatesY-=10
@@ -46,15 +43,24 @@ class tesla(bullets):                  # tesla bullet
     def changeCoordinate(self):
         self.coordinatesY-=5
 
+class mg(bullets):
+    def __init__(self):
+        self.symbol=".."
+        self.color=( 98, 120, 75 )
+        self.present=False
+    def changeCoordinate(self):
+        self.coordinatesY-=13    
 # creating bullet instances and images
-
+mg_bullet=[]
 simple_bullet=simple()
 simple_img = bulletfont.render(simple_bullet.symbol, False, simple_bullet.color)
 tesla_bullet=tesla()
 tesla_img=bulletfont.render(tesla_bullet.symbol, False, tesla_bullet.color)
 alien_bult=alien_bullet()
 alien_img = bulletfont.render(alien_bult.symbol,False,alien_bult.color)
-
+for i in range(0,5):
+    mg_bullet.append(mg())
+mg_img = bulletfont.render(mg_bullet[0].symbol, False, mg_bullet[0].color)
 # draws bullets
 def draw_bullets(bullet,type,gameDisplay):
     if type==0:
@@ -63,6 +69,8 @@ def draw_bullets(bullet,type,gameDisplay):
         gameDisplay.blit(simple_img,(bullet.coordinatesX, bullet.coordinatesY))
     elif type==2:
         gameDisplay.blit(tesla_img,(bullet.coordinatesX, bullet.coordinatesY))
+    elif type==3:
+        gameDisplay.blit(mg_img,(bullet.coordinatesX, bullet.coordinatesY))
     bullet.changeCoordinate()
     if bullet.coordinatesY<0 or bullet.coordinatesY>display_height:
         bullet.present=False
@@ -78,12 +86,15 @@ def set_alien_bult_coordinates(alien_bult):
 def handle_bullet_collision(bullet,type,ship):
     for j in alienlist:
         for i in j:
-            if type==1:
+            if type==1 or type==3:
                 if bullet.present==True and i.health>0 and bullet.coordinatesX-i.coordinatesX<90 and bullet.coordinatesX-i.coordinatesX>0 and bullet.coordinatesY-i.coordinatesY<30 and bullet.coordinatesY-i.coordinatesY>0:
                     bullet.present=False
                     i.health-=1
+                    if i.powerupPresent and i.health==0:
+                        powerlist[i.poInd].present=True
+                        powerlist[i.poInd].setCoordinate(i.coordinatesX,i.coordinatesY)
                     ship.score+=1
-                    print ("Your score = "+str(ship.score))
+                    #print ("Your score = "+str(ship.score))
             if type==2:
                 if bullet.present==True and i.health>0 and bullet.coordinatesX-i.coordinatesX<90 and bullet.coordinatesX-i.coordinatesX>0 and bullet.coordinatesY-i.coordinatesY<30 and bullet.coordinatesY-i.coordinatesY>0:
                     if i.hit_type==0:
@@ -93,16 +104,25 @@ def handle_bullet_collision(bullet,type,ship):
             if i.hit_type==2 and i.health>0:
                 if i.counter==299:
                     i.health-=1
+                    if i.powerupPresent and i.health==0:
+                        powerlist[i.poInd].present=True
+                        powerlist[i.poInd].setCoordinate(i.coordinatesX,i.coordinatesY)
                     ship.score+=1
                     i.counter=0
                     i.hit_type=0
                     if j.index(i)+1<len(j) and j[j.index(i)+1].health>0:
                         j[j.index(i)+1].health-=1
+                        if j[j.index(i)+1].powerupPresent and j[j.index(i)+1].health==0:
+                            powerlist[j[j.index(i)+1].poInd].present=True
+                            powerlist[j[j.index(i)+1].poInd].setCoordinate(j[j.index(i)+1].coordinatesX,j[j.index(i)+1].coordinatesY)
                         ship.score+=1
                     if j.index(i)-1>=0 and j[j.index(i)-1].health>0:
                         j[j.index(i)-1].health-=1
+                        if j[j.index(i)-1].powerupPresent and j[j.index(i)-1].health==0:
+                            powerlist[j[j.index(i)-1].poInd].present=True
+                            powerlist[j[j.index(i)+1].poInd].setCoordinate(j[j.index(i)+1].coordinatesX,j[j.index(i)+1].coordinatesY)
                         ship.score+=1
-                    print ("Your score = "+str(ship.score))
+                    #print ("Your score = "+str(ship.score))
                 i.counter=(i.counter+1)%300
     if type==0:
         i=ship

@@ -8,13 +8,15 @@ right=[0]
 class spaceShip():
     def __init__(self):
         self.symbol= "|/-^-\|"
-        self.moveSymbol= "|/-^-\|"
+        self.sheildSymbol= "|/-^-\|"
         self.health=3                          
         self.coordinates=(display_width/2,display_height-50)
         self.movingrt=False 
         self.movinglt=False
         self.score=0
         self.crashed=False
+        self.mg=False
+        self.mgcount=0
 
     def getHealth(self):
         return self.health

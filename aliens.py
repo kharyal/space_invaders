@@ -39,6 +39,8 @@ class aliens1(aliens):
         self.hit_type=0             # type of bullet if hit
         self.counter=0
         self.aliencolor=( 255, 42, 42 )
+        self.powerupPresent=False
+        self.poInd=0
 
 class aliens2(aliens):
     def __init__(self):
@@ -52,7 +54,9 @@ class aliens2(aliens):
         self.health=3
         self.hit_type=0
         self.counter=0
-        self.aliencolor=( 177, 20, 158 )    
+        self.aliencolor=( 177, 20, 158 )
+        self.powerupPresent=False
+        self.poInd=0    
 
 alienlist=[[],[],[],[],[],[],[],[],[],[],[]]
 
@@ -83,7 +87,7 @@ def draw_aliens(count,direction,direction_change,gameDisplay,ship,alien_present,
                     s1a3 = mfont.render(i.symbol3, False, i.aliencolor)
                     s1a4 = mfont.render(i.symbol4, False, i.aliencolor)
                     if count<10:
-                            gameDisplay.blit(s1a1,(i.coordinatesX,i.coordinatesY))
+                        gameDisplay.blit(s1a1,(i.coordinatesX,i.coordinatesY))
                     elif count>=10 and count<20:
                         gameDisplay.blit(s1a2,(i.coordinatesX,i.coordinatesY))
                     elif count>=20 and count<30:

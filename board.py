@@ -6,6 +6,7 @@ from spaceShip import *
 from bullets import *
 from level1 import *
 from display import *
+from powerups import *
 pygame.init()
 pygame.font.init()
 myfont = pygame.font.SysFont('Comic Sans MS', 40)
@@ -56,6 +57,16 @@ while not ship.crashed:
             if not tesla_bullet.present:
                 tesla_bullet.present=True
                 tesla_bullet.setCoordinate(ship.coordinates[0]+27,ship.coordinates[1])
+        if event.key==pygame.K_e:
+            lastwasC=0
+            if count%10 ==0 and ship.mg==True:
+                if not mg_bullet[ship.mgcount].present:
+                    mg_bullet[ship.mgcount].present=True
+                    mg_bullet[ship.mgcount].setCoordinate(ship.coordinates[0]+27,ship.coordinates[1])
+                    ship.mgcount+=1
+                if ship.mgcount==5:
+                    ship.mg=False
+                    ship.mgcount=0
     
     elif event.type==pygame.KEYUP:
         if event.key==pygame.K_a:
@@ -69,6 +80,7 @@ while not ship.crashed:
     gameDisplay.blit(healthimg,(10,display_height-55))
     gameDisplay.blit(scoreimg,(display_width-display_width/12,display_height-55))
 
+    drawPU()    
     if movinglt and ship.coordinates[0]>0:
 #        print("movinglt")
         gameDisplay.blit(shipImg,ship.coordinates)
@@ -100,7 +112,13 @@ while not ship.crashed:
         set_alien_bult_coordinates(alien_bult)
     if alien_bult.present:
         draw_bullets(alien_bult,0,gameDisplay)
-
+    for i in range(0,5):
+        if mg_bullet[i].present:
+            draw_bullets(mg_bullet[i],3,gameDisplay)
+    
+    handlePUcollisions(ship)
+    for i in range (0,5):
+        handle_bullet_collision(mg_bullet[i],3,ship)
     handle_bullet_collision(simple_bullet,1,ship)
     handle_bullet_collision(tesla_bullet,2,ship)
     handle_bullet_collision(alien_bult,0,ship)
