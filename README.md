@@ -1,29 +1,24 @@
 # space_invaders
 """written by Chaitanya Kharyal"""
 
-# playing the game:
-pull the game into your computer
-enter python3 board.py
-the game screen will pop up
+version 1.3
 
-# Instructions:
-these instructions are for version 1.1 of this game;
-move your spaceShip using 'A' and 'D';
-shoot simple bullets with 'SPACE' and tesla bullets with 'W';
-kill all the aliens;
+# How to run?
+install python3 and pygame for python3
+# if you are a player:
+1) open terminal
+2) go into space invaders directory
+3) type python3 board.py
+the game screen will appear
 
-# aliens:
-__( - )__:
-      these have 1 health
-      
-      
-__(* *)__:
-      these have 3 health
+# if you are a developer:
+1) open terminal
+2) go into space invaders directory
+3) unzip DEVINIT.zip
+4) type DEVINIT.py
 
+# Have some idea?
+if you have some idea contact me and i will provide you the developer access
 
-UPDATES:
-version 1.12
-	27/04/2018 4:27AM
-	* minor bug fixes
-	* included developer's version
-
+# what's there in developer access?
+a whole lot of cheat codes... amd much more
