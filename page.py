@@ -24,7 +24,7 @@ def disp_page(level,count):
         text=[]
         a=myfont.render("Your space-ship is under attack, save it from aliens!!!",False,color)
         text.append(a)
-        a=myfont.render("Move your ship using 'A' and 'D' and shoot bullets with 'W'",False,color)
+        a=myfont.render("Move your ship using 'A' and 'D' and shoot bullets with 'SPACE'",False,color)
         text.append(a)
         a=myfont.render("Kill as many aliens as you can and reach the Highest score!!!",False,color)
         text.append(a)
