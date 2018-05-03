@@ -58,24 +58,15 @@ class aliens2(aliens):
         self.powerupPresent=False
         self.poInd=0    
 
-alienlist=[[],[],[],[],[],[],[],[],[],[],[]]
-
 p=0
-
-for i in range (0,7):
-    alienlist[0].append(aliens1())
-    alienlist[0][p].setCoordinate(100+p*90,30)
-    p+=1
-
 tes_a_color=( 34, 175, 255 )
 
 mfont = pygame.font.SysFont('Comic Sans MS', 30)
-a1t1 = mfont.render(alienlist[0][0].if_tesla1, False, tes_a_color)
-a1t2 = mfont.render(alienlist[0][0].if_tesla2, False, tes_a_color)
-
 alien_present=False
 # draws aliens
 def draw_aliens(count,direction,direction_change,gameDisplay,ship,alien_present,level_change):
+    a1t1 = mfont.render(alienlist[0][0].if_tesla1, False, tes_a_color)
+    a1t2 = mfont.render(alienlist[0][0].if_tesla2, False, tes_a_color)
     alien_present=False
     for j in alienlist:
         for i in j:

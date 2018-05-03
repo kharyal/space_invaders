@@ -17,6 +17,8 @@ class spaceShip():
         self.crashed=False
         self.mg=False
         self.mgcount=0
+        self.freezed=False
+        self.freezetimer=0
 
     def getHealth(self):
         return self.health
@@ -25,7 +27,7 @@ class spaceShip():
         self.health-=1
     
     def moveleft(self):
-        self.coordinates=(self.coordinates[0]-5,display_height-50)
+        self.coordinates=(self.coordinates[0]-display_width/160,display_height-50)
         
     def moveright(self):
-        self.coordinates=(self.coordinates[0]+5,display_height-50)
+        self.coordinates=(self.coordinates[0]+display_width/160,display_height-50)

@@ -9,8 +9,47 @@ pygame.font.init()
 from display import *
 from powerups import *
 def changelevel(level,alienlist,level_change,ship):
-    alienSpeed=3
+    alienSpeed=origSpeed
     level+=1
+    if level == 1:
+        powerlist.clear()
+        alienlist[0].clear()
+        p=0
+        for i in range (0,7):
+            alienlist[0].append(aliens1())
+            alienlist[0][p].setCoordinate(100+p*90,30)
+            p+=1
+        for i in alienlist:
+            for j in i:
+                randnum=random.randint(1,101)
+                if randnum%4==0:
+                    #print(i.index(j))
+                    j.powerupPresent=True
+                    potype=random.randint(0,ponumber)
+                    if potype==0:
+                        j.poInd=len(powerlist)
+                        po=hp()
+                        po.setCoordinate(j.coordinatesX,j.coordinatesY)
+                        powerlist.append(po)
+                    elif potype==1:
+                        j.poInd=len(powerlist)                
+                        po=machineGun()
+                        po.setCoordinate(j.coordinatesX,j.coordinatesY)                
+                        powerlist.append(po)
+                    elif potype==2:
+                        j.poInd=len(powerlist)
+                        po=danger()
+                        po.setCoordinate(j.coordinatesX,j.coordinatesY)
+                        powerlist.append(po)
+                    elif potype==3:
+                        j.poInd=len(powerlist)
+                        po=freeze()
+                        po.setCoordinate(j.coordinatesX,j.coordinatesY)
+                        powerlist.append(po)
+                    #print(j.poInd)
+                    #print(len(powerlist))
+        for i in powerlist:
+            i.resize(int(display_height))
     if level==2:
         powerlist.clear()
         alienlist[0].clear()
@@ -50,6 +89,11 @@ def changelevel(level,alienlist,level_change,ship):
                     elif potype==2:
                         j.poInd=len(powerlist)
                         po=danger()
+                        po.setCoordinate(j.coordinatesX,j.coordinatesY)
+                        powerlist.append(po)
+                    elif potype==3:
+                        j.poInd=len(powerlist)
+                        po=freeze()
                         po.setCoordinate(j.coordinatesX,j.coordinatesY)
                         powerlist.append(po)
                     #print(j.poInd)

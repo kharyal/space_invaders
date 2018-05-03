@@ -23,7 +23,7 @@ class alien_bullet(bullets):           # alien bullets
         self.present=False
     
     def changeCoordinate(self):
-        self.coordinatesY+=5
+        self.coordinatesY+=display_height/160
 
 class simple(bullets):                 # simple bullet
     def __init__(self):            
@@ -32,7 +32,7 @@ class simple(bullets):                 # simple bullet
         self.present=False             # checks if bullet is present currently
 
     def changeCoordinate(self):        # changes Y coordinate 
-        self.coordinatesY-=10
+        self.coordinatesY-=display_height/80
 
 class tesla(bullets):                  # tesla bullet
     def __init__(self):
@@ -41,7 +41,7 @@ class tesla(bullets):                  # tesla bullet
         self.present=False
 
     def changeCoordinate(self):
-        self.coordinatesY-=5
+        self.coordinatesY-=display_height/160
 
 class mg(bullets):
     def __init__(self):
@@ -49,7 +49,7 @@ class mg(bullets):
         self.color=( 98, 120, 75 )
         self.present=False
     def changeCoordinate(self):
-        self.coordinatesY-=13    
+        self.coordinatesY-=display_height/61    
 # creating bullet instances and images
 mg_bullet=[]
 simple_bullet=simple()
