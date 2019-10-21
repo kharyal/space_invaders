@@ -21,4 +21,4 @@ the game screen will appear
 if you have some idea contact me and i will provide you the developer access
 
 # what's there in developer access?
-a whole lot of cheat codes... amd much more
+a whole lot of cheat codes... and much more
